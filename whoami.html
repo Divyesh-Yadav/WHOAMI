@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b12">
+<title>WHOAMI — Identity, Redefined.</title>
+<style>
+:root{--bg:#080b12;--panel:#101622;--panel2:#151e2c;--line:rgba(155,180,220,.16);--text:#f1f6ff;--muted:#91a0b9;--cyan:#67e8f9;--violet:#a78bfa;--green:#86efac}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 12% 0%,rgba(65,88,180,.16),transparent 35%),radial-gradient(ellipse at 90% 30%,rgba(34,211,238,.08),transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92%);margin:auto}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{font-weight:900;letter-spacing:.16em;font-size:1.05rem;display:flex;align-items:center;gap:10px}
+.brand-mark{width:30px;height:30px;border:1px solid var(--cyan);border-radius:9px;display:grid;place-items:center;color:var(--cyan);font-size:17px;box-shadow:0 0 20px #67e8f91c}
+.navlinks{display:flex;gap:28px;color:var(--muted);font-size:.9rem}
+.navlinks a:hover{color:var(--cyan)}
+.pill{border:1px solid #67e8f94d;color:var(--cyan);background:#67e8f910;border-radius:999px;padding:7px 12px;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.hero{padding:88px 0 65px;display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:50px}
+.eyebrow{color:var(--cyan);font-size:.78rem;letter-spacing:.19em;text-transform:uppercase;font-weight:750}
+h1{font-size:clamp(3.5rem,8vw,6.6rem);line-height:.94;letter-spacing:-.075em;margin:20px 0}
+h1 span{color:transparent;-webkit-text-stroke:1.5px var(--cyan);text-shadow:0 0 35px #67e8f91c}
+.lead{max-width:540px;color:var(--muted);font-size:1.08rem}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:12px 17px;font-weight:700;transition:.2s}
+.btn:hover{transform:translateY(-2px);border-color:#67e8f980}
+.btn.primary{background:var(--cyan);border-color:var(--cyan);color:#071017;box-shadow:0 8px 35px #67e8f91d}
+.hero-card{position:relative;padding:22px;border:1px solid #67e8f94a;border-radius:25px;background:linear-gradient(145deg,#172538e8,#0d121de8);box-shadow:0 25px 90px #0008;overflow:hidden}
+.hero-card:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#67e8f912;filter:blur(20px);right:-75px;top:-80px}
+.card-top,.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-top{font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.status{color:var(--green);font-size:.75rem}
+.avatar{margin:30px auto 15px;width:100px;height:100px;border-radius:30px;display:grid;place-items:center;font-size:2.7rem;background:linear-gradient(135deg,#164e63,#312e81);border:1px solid #67e8f980;box-shadow:0 0 50px #67e8f91a}
+.preview-name{text-align:center;font-size:1.8rem;font-weight:850;letter-spacing:-.04em}
+.preview-handle{text-align:center;color:var(--cyan);font-size:.85rem}
+.preview-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0 25px}
+.tag{border:1px solid var(--line);background:#ffffff06;color:#c4d0e3;border-radius:8px;padding:5px 9px;font-size:.76rem}
+.card-bottom{border-top:1px solid var(--line);padding-top:15px;color:var(--muted);font-size:.72rem}
+.section{padding:68px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.05em;line-height:1.1;margin:8px 0}
+.sub{color:var(--muted);max-width:560px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{background:linear-gradient(145deg,#121a27,#0d121b);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:190px}
+.feature-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#67e8f912;color:var(--cyan);font-size:1.25rem;margin-bottom:20px}
+.feature h3{margin:0 0 7px;font-size:1.04rem}
+.feature p{margin:0;color:var(--muted);font-size:.9rem}
+.workspace{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.panel{border:1px solid var(--line);background:linear-gradient(145deg,#121a27,#0d121b);border-radius:20px;padding:24px}
+.panel h3{margin:0 0 5px;font-size:1.2rem}
+.panel-desc{color:var(--muted);font-size:.88rem;margin:0 0 20px}
+.field{margin-bottom:15px}
+label{display:block;color:#c6d2e4;font-size:.82rem;font-weight:650;margin-bottom:7px}
+input,select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#080d16;color:var(--text);outline:none}
+input:focus,select:focus{border-color:#67e8f980;box-shadow:0 0 0 3px #67e8f912}
+input[type=color]{padding:4px;height:45px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.identity-card{background:linear-gradient(145deg,#142b3b,#171631 70%,#0c1320);border:1px solid #67e8f966;border-radius:20px;padding:22px;position:relative;overflow:hidden;min-height:355px}
+.identity-card:after{content:"";position:absolute;width:210px;height:210px;right:-80px;bottom:-100px;border:1px solid #67e8f930;border-radius:50%;box-shadow:0 0 0 25px #67e8f909,0 0 0 50px #67e8f906;pointer-events:none}
+.id-label{font-size:.7rem;letter-spacing:.14em;color:#a6b7ce;text-transform:uppercase}
+.id-main{display:flex;align-items:center;gap:16px;margin:27px 0 20px}
+.id-avatar{width:74px;height:74px;flex-shrink:0;border-radius:22px;background:#67e8f91b;border:1px solid #67e8f980;display:grid;place-items:center;font-size:2rem}
+.id-name{font-size:1.5rem;line-height:1.2;font-weight:850;overflow-wrap:anywhere}
+.id-handle{color:var(--cyan);font-size:.83rem}
+.id-bio{color:#c1cde0;font-size:.88rem;min-height:45px}
+.id-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:19px}
+.id-meta small{display:block;color:#92a4bd;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em}
+.id-meta strong{font-size:.85rem;overflow-wrap:anywhere}
+.id-footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ffffff1b;padding-top:15px;margin-top:22px;color:#9eafc6;font-size:.68rem;letter-spacing:.07em}
+.quiz-box{border:1px solid var(--line);border-radius:18px;background:#0e1420;padding:23px}
+.progress-row{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem;margin-bottom:10px}
+.progress{height:5px;background:#ffffff10;border-radius:99px;overflow:hidden;margin-bottom:24px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .3s}
+.question{font-size:1.2rem;font-weight:800;margin:0 0 16px}
+.answers{display:grid;gap:10px}
+.answer{border:1px solid var(--line);background:#ffffff04;color:#dce7f7;text-align:left;padding:13px 14px;border-radius:11px}
+.answer:hover{border-color:#67e8f970;background:#67e8f90b}
+.answer.selected{border-color:var(--cyan);background:#67e8f914;color:var(--cyan)}
+.quiz-controls{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.result{display:none;margin-top:18px;padding:17px;border:1px solid #a78bfa55;background:#a78bfa0c;border-radius:13px}
+.result h4{font-size:1.2rem;margin:0 0 5px}
+.result p{color:var(--muted);margin:0}
+.notice{font-size:.78rem;color:var(--muted);margin-top:13px}
+footer{border-top:1px solid var(--line);padding:25px 0 35px;color:var(--muted);font-size:.8rem}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e6fbff;color:#071017;padding:11px 16px;border-radius:10px;font-size:.85rem;font-weight:750;transition:.25s;z-index:5}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:60px;gap:35px}.hero-card{max-width:480px;width:100%;margin:auto}.grid{grid-template-columns:1fr 1fr}.workspace{grid-template-columns:1fr}.navlinks{gap:14px}.navlinks a:nth-child(2){display:none}}
+@media(max-width:520px){.navlinks{display:none}.hero{padding:48px 0}.grid{grid-template-columns:1fr}.section{padding:48px 0}.section-head{align-items:start;flex-direction:column}.panel{padding:17px}.two{grid-template-columns:1fr}.hero-card{padding:17px}h1{font-size:3.8rem}}
+@media print{body{background:#fff;color:#111}.wrap,nav,main,footer{display:none!important}#printCard{display:block!important}}
+</style>
+</head>
+<body>
+<nav class="wrap">
+  <a class="brand" href="#home"><span class="brand-mark">⌁</span> WHOAMI</a>
+  <div class="navlinks"><a href="#features">Features</a><a href="#studio">ID Studio</a><a href="#quiz">Discover</a></div>
+  <a class="pill" href="#studio">Create your ID ↗</a>
+</nav>
+<main>
+<section class="hero wrap" id="home">
+  <div>
+    <div class="eyebrow">A digital identity experience</div>
+    <h1>WHO<br><span>AM I?</span></h1>
+    <p class="lead">More than a name. More than a profile. Build a digital identity that reflects your interests, skills, personality, and the things that make you <em>you</em>.</p>
+    <div class="actions"><a class="btn primary" href="#studio">Create your identity ↗</a><a class="btn" href="#quiz">Discover yourself ↓</a></div>
+    <p class="notice">A creative identity project. Not an official identity document.</p>
+  </div>
+  <div class="hero-card">
+    <div class="card-top"><span>WHOAMI / IDENTITY PREVIEW</span><span class="status">● SYSTEM ONLINE</span></div>
+    <div class="avatar" id="previewAvatar">✦</div>
+    <div class="preview-name" id="previewName">YOUR NAME</div>
+    <div class="preview-handle" id="previewHandle">@youridentity</div>
+    <div class="preview-tags" id="previewTags"><span class="tag">CREATIVE</span><span class="tag">CURIOUS</span><span class="tag">BUILDER</span></div>
+    <div class="card-bottom"><span>PERSONAL IDENTITY PROFILE</span><span id="previewCode">WA-000001</span></div>
+  </div>
+</section>
+<section class="section wrap" id="features">
+  <div class="section-head"><div><div class="eyebrow">Not just another profile</div><h2>Your identity. Your rules.</h2></div><p class="sub">A personal space to explore what makes you different and choose how you show up in the digital world.</p></div>
+  <div class="grid">
+    <article class="feature"><div class="feature-icon">⌘</div><h3>Personal ID card</h3><p>Design a unique identity card with your name, handle, interests, and signature style.</p></article>
+    <article class="feature"><div class="feature-icon">✧</div><h3>Discover your traits</h3><p>Answer a quick, fun quiz and get a personality-style result to add to your profile.</p></article>
+    <article class="feature"><div class="feature-icon">◇</div><h3>Show your skills</h3><p>Highlight the things you're learning, building, creating, and proud of.</p></article>
+    <article class="feature"><div class="feature-icon">◈</div><h3>Your visual style</h3><p>Pick an avatar emoji and accent color to make your identity card feel like yours.</p></article>
+    <article class="feature"><div class="feature-icon">⌁</div><h3>Made to be shared</h3><p>Download your card as an image and use it in a portfolio or project showcase.</p></article>
+    <article class="feature"><div class="feature-icon">⛨</div><h3>Privacy comes first</h3><p>Your entries stay in this browser unless you choose to share them. No account needed.</p></article>
+  </div>
+</section>
+<section class="section wrap" id="studio">
+  <div class="section-head"><div><div class="eyebrow">Identity studio / 01</div><h2>Build your digital ID.</h2></div><p class="sub">Make it yours. The preview updates as you edit.</p></div>
+  <div class="workspace">
+    <div class="panel">
+      <h3>Your details</h3><p class="panel-desc">Use a nickname if you prefer. Avoid adding private information.</p>
+      <div class="field"><label for="name">Display name</label><input id="name" maxlength="32" placeholder="e.g. Alex Nova" value="Your Name"></div>
+      <div class="two">
+        <div class="field"><label for="handle">Username</label><input id="handle" maxlength="20" placeholder="yourhandle" value="youridentity"></div>
+        <div class="field"><label for="avatar">Avatar symbol</label><select id="avatar"><option>✦</option><option>☄</option><option>✿</option><option>⚡</option><option>☾</option><option>♟</option><option>◎</option><option>🪐</option><option>🦊</option><option>🤖</option><option>🎧</option><option>🧩</option></select></div>
+      </div>
+      <div class="field"><label for="bio">A little about you</label><input id="bio" maxlength="100" placeholder="Curious mind. Future builder." value="Curious mind. Future builder."></div>
+      <div class="two">
+        <div class="field"><label for="interest">Main interest</label><select id="interest"><option>Coding</option><option>Art & design</option><option>Science</option><option>Robotics</option><option>Music</option><option>Writing</option><option>Gaming</option><option>Nature</option><option>Sports</option><option>Learning</option></select></div>
+        <div class="field"><label for="trait">Your vibe</label><select id="trait"><option>Curious Creator</option><option>Quiet Thinker</option><option>Bold Explorer</option><option>Future Builder</option><option>Creative Dreamer</option><option>Team Player</option></select></div>
+      </div>
+      <div class="field"><label for="color">Accent color</label><input id="color" type="color" value="#67e8f9"></div>
+      <div class="actions"><button class="btn primary" id="saveBtn">Save on this device</button><button class="btn" id="resetBtn">Reset</button></div>
+      <p class="notice">Save uses your browser's local storage on this device. It does not send your details to a server.</p>
+    </div>
+    <div>
+      <div class="identity-card" id="identityCard">
+        <div class="card-top"><span>WHOAMI / PERSONAL ID</span><span class="status">● ACTIVE</span></div>
+        <div class="id-main"><div class="id-avatar" id="idAvatar">✦</div><div><div class="id-name" id="idName">Your Name</div><div class="id-handle" id="idHandle">@youridentity</div></div></div>
+        <div class="id-bio" id="idBio">Curious mind. Future builder.</div>
+        <div class="preview-tags" style="justify-content:flex-start;margin:15px 0 12px"><span class="tag" id="idInterest">CODING</span><span class="tag" id="idTrait">CURIOUS CREATOR</span></div>
+        <div class="id-meta"><div><small>Identity type</small><strong>Digital Creator</strong></div><div><small>Member since</small><strong id="idDate">TODAY</strong></div></div>
+        <div class="id-footer"><span>SELF-EXPRESSION • NOT OFFICIAL ID</span><span id="idCode">WA-000001</span></div>
+      </div>
+      <div class="actions"><button class="btn primary" id="downloadBtn">Download ID card ↓</button><button class="btn" id="copyBtn">Copy profile text</button></div>
+      <p class="notice">Downloads a PNG image of your card. You can use your card in your portfolio or project README.</p>
+    </div>
+  </div>
+</section>
+<section class="section wrap" id="quiz">
+  <div class="section-head"><div><div class="eyebrow">Identity lab / 02</div><h2>Discover your vibe.</h2></div><p class="sub">A short, just-for-fun quiz. No label can define your whole identity.</p></div>
+  <div class="quiz-box">
+    <div class="progress-row"><span id="quizStep">QUESTION 1 OF 5</span><span id="quizPercent">20%</span></div>
+    <div class="progress"><span id="quizProgress"></span></div>
+    <p class="question" id="question">When you get a free afternoon, what sounds best?</p>
+    <div class="answers" id="answers"></div>
+    <div class="quiz-controls"><button class="btn" id="backBtn" disabled>← Back</button><button class="btn primary" id="nextBtn" disabled>Next →</button></div>
+    <div class="result" id="result"><h4 id="resultTitle">Your vibe</h4><p id="resultText"></p><div class="actions"><button class="btn primary" id="useResultBtn">Add to my ID</button><button class="btn" id="retryBtn">Retake quiz</button></div></div>
+  </div>
+</section>
+<section class="section wrap">
+  <div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap">
+    <div><div class="eyebrow">Your identity is a work in progress</div><h2 style="margin-bottom:8px">Keep becoming you.</h2><p class="sub">Your interests can change. Your skills can grow. Your identity is yours to define.</p></div>
+    <a class="btn primary" href="#studio">Create your ID ↗</a>
+  </div>
+</section>
+</main>
+<footer><div class="wrap footer-inner"><span class="brand"><span class="brand-mark">⌁</span> WHOAMI</span><span>Identity, redefined. Built for self-expression.</span><span>Not an official identity or verification service.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const $ = id => document.getElementById(id);
+const fields = ["name","handle","avatar","bio","interest","trait","color"];
+const defaultData = {name:"Your Name",handle:"youridentity",avatar:"✦",bio:"Curious mind. Future builder.",interest:"Coding",trait:"Curious Creator",color:"#67e8f9"};
+function getData(){const d={};fields.forEach(k=>d[k]=$(k).value);return d}
+function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove("show"),2200)}
+function cleanHandle(s){return s.trim().replace(/^@+/,"").replace(/[^a-zA-Z0-9_.-]/g,"").slice(0,20)||"youridentity"}
+function updatePreview(){
+  const d=getData(), name=d.name.trim()||"Your Name", handle=cleanHandle(d.handle);
+  $("handle").value=handle;
+  $("previewName").textContent=name.toUpperCase();$("previewHandle").textContent="@"+handle;$("previewAvatar").textContent=d.avatar;
+  $("previewCode").textContent="WA-"+(handle.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6).padEnd(6,"0"));
+  $("previewTags").innerHTML="";
+  [d.interest,d.trait].forEach(x=>{const s=document.createElement("span");s.className="tag";s.textContent=x.toUpperCase();$("previewTags").appendChild(s)});
+  $("idName").textContent=name;$("idHandle").textContent="@"+handle;$("idAvatar").textContent=d.avatar;$("idBio").textContent=d.bio.trim()||"Making my own path.";
+  $("idInterest").textContent=d.interest.toUpperCase();$("idTrait").textContent=d.trait.toUpperCase();$("idCode").textContent=$("previewCode").textContent;
+  document.documentElement.style.setProperty("--cyan",d.color);
+  $("idDate").textContent=new Date().toLocaleDateString(undefined,{month:"short",year:"numeric"}).toUpperCase();
+  $("identityCard").style.borderColor=d.color+"99";$("idAvatar").style.borderColor=d.color;$("idAvatar").style.color=d.color;
+}
+fields.forEach(k=>$(k).addEventListener("input",updatePreview));
+$("saveBtn").addEventListener("click",()=>{try{localStorage.setItem("whoami-profile-v1",JSON.stringify(getData()));showToast("Identity saved on this device ✓")}catch(e){showToast("Could not save in this browser")}});
+$("resetBtn").addEventListener("click",()=>{fields.forEach(k=>$(k).value=defaultData[k]);updatePreview();showToast("Profile reset")});
+try{const saved=JSON.parse(localStorage.getItem("whoami-profile-v1")||"null");if(saved)fields.forEach(k=>{if(typeof saved[k]==="string")$(k).value=saved[k]})}catch(e){}
+updatePreview();
+$("copyBtn").addEventListener("click",async()=>{const d=getData();const text=`WHOAMI — ${d.name}\nUsername: @${cleanHandle(d.handle)}\nAbout: ${d.bio}\nInterest: ${d.interest}\nVibe: ${d.trait}`;try{await navigator.clipboard.writeText(text);showToast("Profile text copied ✓")}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();showToast("Profile text copied ✓")}});
+$("downloadBtn").addEventListener("click",()=>{
+  const d=getData(), canvas=document.createElement("canvas");canvas.width=1200;canvas.height=700;const c=canvas.getContext("2d");
+  const grad=c.createLinearGradient(0,0,1200,700);grad.addColorStop(0,"#142b3b");grad.addColorStop(.7,"#171631");grad.addColorStop(1,"#0c1320");c.fillStyle=grad;c.fillRect(0,0,1200,700);
+  c.strokeStyle=d.color+"99";c.lineWidth=3;c.strokeRect(20,20,1160,660);
+  c.fillStyle="#a6b7ce";c.font="24px Arial";c.fillText("WHOAMI / PERSONAL IDENTITY",60,75);
+  c.fillStyle=d.color;c.font="bold 32px Arial";c.fillText("● ACTIVE",965,75);
+  c.fillStyle="#ffffff10";c.beginPath();c.arc(1050,600,230,0,Math.PI*2);c.fill();
+  c.fillStyle="#67e8f91b";c.strokeStyle=d.color;c.lineWidth=3;roundRect(c,65,145,180,180,35);c.fill();c.stroke();
+  c.fillStyle=d.color;c.font="100px Arial";c.textAlign="center";c.fillText(d.avatar,155,260);c.textAlign="left";
+  c.fillStyle="#f1f6ff";c.font="bold 62px Arial";wrapText(c,d.name.trim()||"Your Name",290,205,820,68);
+  c.fillStyle=d.color;c.font="32px Arial";c.fillText("@"+cleanHandle(d.handle),292,270);
+  c.fillStyle="#c1cde0";c.font="28px Arial";wrapText(c,d.bio.trim()||"Making my own path.",65,390,1050,40);
+  drawTag(c,d.interest.toUpperCase(),65,470,d.color);drawTag(c,d.trait.toUpperCase(),300,470,d.color);
+  c.strokeStyle="#ffffff30";c.beginPath();c.moveTo(65,570);c.lineTo(1135,570);c.stroke();
+  c.fillStyle="#9eafc6";c.font="22px Arial";c.fillText("SELF-EXPRESSION • NOT OFFICIAL ID",65,620);c.fillText($("previewCode").textContent,940,620);
+  const a=document.createElement("a");a.download="whoami-identity-card.png";a.href=canvas.toDataURL("image/png");a.click();showToast("Your identity card is ready ✓");
+});
+function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function wrapText(c,text,x,y,maxWidth,lineHeight){const words=text.split(" ");let line="";for(const word of words){const test=line+word+" ";if(c.measureText(test).width>maxWidth&&line){c.fillText(line,x,y);line=word+" ";y+=lineHeight}else line=test}c.fillText(line,x,y)}
+function drawTag(c,text,x,y,color){c.font="bold 22px Arial";const w=c.measureText(text).width+38;c.fillStyle="#ffffff0c";c.strokeStyle=color+"88";roundRect(c,x,y,w,48,12);c.fill();c.stroke();c.fillStyle="#dce7f7";c.fillText(text,x+19,y+31)}
+const quiz=[
+ {q:"When you get a free afternoon, what sounds best?",a:[["Build or figure out how something works","Builder"],["Make art, music, or a story","Creator"],["Explore somewhere new or try something new","Explorer"],["Hang out and make something with friends","Connector"]]},
+ {q:"When a tricky problem appears, you usually…",a:[["Break it into smaller logical steps","Builder"],["Look for an unusual, creative solution","Creator"],["Experiment and learn as I go","Explorer"],["Talk it through with someone","Connector"]]},
+ {q:"Which compliment would mean the most to you?",a:[["“You make complicated things work.”","Builder"],["“You have a unique imagination.”","Creator"],["“You're brave enough to try.”","Explorer"],["“You make people feel included.”","Connector"]]},
+ {q:"Pick a project you'd love to try.",a:[["Invent an app or robot","Builder"],["Design a comic, brand, or animation","Creator"],["Learn a totally new skill","Explorer"],["Organize a team event or community","Connector"]]},
+ {q:"What motivates you most?",a:[["Solving problems and making progress","Builder"],["Expressing ideas and making things beautiful","Creator"],["Discovery, challenge, and possibility","Explorer"],["Helping people and sharing experiences","Connector"]]}
+];
+let qi=0, answers=Array(quiz.length).fill(null), quizResult="";
+function renderQuiz(){
+ const item=quiz[qi];$("question").textContent=item.q;$("quizStep").textContent=`QUESTION ${qi+1} OF ${quiz.length}`;$("quizPercent").textContent=`${Math.round((qi+1)/quiz.length*100)}%`;$("quizProgress").style.width=((qi+1)/quiz.length*100)+"%";
+ $("answers").innerHTML="";item.a.forEach(([label,value])=>{const b=document.createElement("button");b.className="answer"+(answers[qi]===value?" selected":"");b.textContent=label;b.addEventListener("click",()=>{answers[qi]=value;renderQuiz()});$("answers").appendChild(b)});
+ $("backBtn").disabled=qi===0;$("nextBtn").disabled=!answers[qi];$("nextBtn").textContent=qi===quiz.length-1?"Reveal my vibe ✨":"Next →";$("result").style.display="none";
+}
+$("backBtn").addEventListener("click",()=>{if(qi>0){qi--;renderQuiz()}});
+$("nextBtn").addEventListener("click",()=>{if(!answers[qi])return;if(qi<quiz.length-1){qi++;renderQuiz()}else showResult()});
+function showResult(){
+ const counts={Builder:0,Creator:0,Explorer:0,Connector:0};answers.forEach(a=>{if(a)counts[a]++});const top=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];
+ const results={
+ Builder:["The Future Builder","You enjoy solving problems, understanding how things work, and turning ideas into something real. Keep experimenting and making."],
+ Creator:["The Creative Mind","You like expressing ideas in original ways and imagining what could be. Keep making things that only you would think to make."],
+ Explorer:["The Bold Explorer","Curiosity pulls you toward new experiences and skills. Keep asking questions, trying things, and learning from the unexpected."],
+ Connector:["The Community Connector","You value shared ideas and the energy people bring together. Keep building spaces where others can contribute and belong."]};
+ quizResult=results[top][0];$("resultTitle").textContent=results[top][0];$("resultText").textContent=results[top][1];$("result").style.display="block";$("nextBtn").disabled=true;$("result").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+$("useResultBtn").addEventListener("click",()=>{$("trait").value=quizResult;$("studio").scrollIntoView({behavior:"smooth"});updatePreview();showToast("Your vibe was added to your ID")});
+$("retryBtn").addEventListener("click",()=>{qi=0;answers=Array(quiz.length).fill(null);renderQuiz()});
+renderQuiz();
+</script>
+</body>
+</html>
